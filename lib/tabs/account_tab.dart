@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/components.dart';
 
 class AccountTab extends StatefulWidget {
   AccountTab({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class _AccountTabState extends State<AccountTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Account'),
+          SmartHeadline('Account'),
           RaisedButton(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

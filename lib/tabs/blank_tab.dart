@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/components.dart';
 
 class BlankTab extends StatefulWidget {
   BlankTab({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class _BlankTabState extends State<BlankTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Blank'),
+          SmartHeadline('Blank'),
         ],
       ),
     );

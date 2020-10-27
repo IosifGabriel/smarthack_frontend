@@ -12,6 +12,8 @@ class MyApp extends StatelessWidget {
       title: 'Smarthack',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Montserrat',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.deepPurple,
       ),
       routes: {
