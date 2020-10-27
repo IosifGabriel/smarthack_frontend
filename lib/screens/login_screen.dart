@@ -20,14 +20,15 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SmartHeadline('Log in'),
-              RaisedButton(
-                child: Text('Log in'),
+              SmartButton(
+                icon: Icons.login,
+                text: 'Log in',
                 onPressed: () {
                   Navigator.pushNamed(context, '/');
                 },
               ),
-              TextButton(
-                child: Text('Register'),
+              SmartTextButton(
+                text: 'Register',
                 onPressed: () {
                   Navigator.pushNamed(context, '/register');
                 },

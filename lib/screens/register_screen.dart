@@ -20,14 +20,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SmartHeadline('Register'),
-              RaisedButton(
-                child: Text('Register'),
+              SmartButton(
+                icon: Icons.login,
+                text: 'Register',
                 onPressed: () {
                   Navigator.pushNamed(context, '/');
                 },
               ),
-              TextButton(
-                child: Text('Log in'),
+              SmartTextButton(
+                text: 'Log in',
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },

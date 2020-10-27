@@ -17,15 +17,9 @@ class _AccountTabState extends State<AccountTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SmartHeadline('Account'),
-          RaisedButton(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.logout),
-                SizedBox(width: 10),
-                Text('Log out'),
-              ],
-            ),
+          SmartButton(
+            icon: Icons.logout,
+            text: 'Log out',
             onPressed: () {
               Navigator.pushNamed(context, '/login');
             },
