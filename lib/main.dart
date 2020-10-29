@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import './services/services.dart';
 import './screens/screens.dart';
 
+void setupLocator() {
+  GetIt.I.registerSingleton<TodoService>(TodoService());
+}
+
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 

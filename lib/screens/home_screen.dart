@@ -13,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _children = <Widget>[
     HomeTab(),
     BlankTab(),
+    TodoTab(),
     AccountTab(),
   ];
 
@@ -33,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Blank',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Todo',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Account',
           ),
@@ -43,6 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
             _currentTab = index;
           });
         },
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
       ),
     );
   }
