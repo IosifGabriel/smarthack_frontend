@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import '../components/components.dart';
 import '../models/models.dart';
 import '../services/services.dart';
+import '../features/todos/todos.dart';
 
 class TodoTab extends StatefulWidget {
   TodoTab({Key key}) : super(key: key);
@@ -38,17 +39,35 @@ class _TodoTabState extends State<TodoTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SmartHeadline('Todos'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SmartHeadline('Todos'),
+              SmartButton(
+                icon: Icons.add,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TodoCreate()),
+                  );
+                },
+              ),
+            ],
+          ),
           Expanded(
             child: Builder(builder: (_) {
-              if (_isLoading) return SmartLoader();
-              if (_apiResponse.error)
-                return SmartError(
-                  message: _apiResponse.errorMessage,
-                  errorCode: _apiResponse.errorCode,
-                );
-
-              return Text('working');
+              // if (_isLoading) return SmartLoader();
+              // if (_apiResponse.error)
+              //   return SmartError(
+              //     message: _apiResponse.errorMessage,
+              //     errorCode: _apiResponse.errorCode,
+              //   );
+              // return TodosList(_apiResponse.data);
+              return TodosList([
+                Todo(id: '1', text: 'test 1'),
+                Todo(id: '2', text: 'test 2'),
+                Todo(id: '3', text: 'test 3'),
+              ]);
             }),
           ),
         ],
