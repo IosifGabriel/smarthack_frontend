@@ -16,22 +16,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SmartHeadline('Register'),
-              SmartButton(
-                icon: Icons.login,
-                text: 'Register',
-                onPressed: () {
-                  Navigator.pushNamed(context, '/');
-                },
+              Column(
+                children: [
+                  SmartTextField(
+                    label: 'name',
+                  ),
+                  SizedBox(height: 20),
+                  SmartTextField(
+                    label: 'email',
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 20),
+                  SmartTextField(
+                    label: 'password',
+                    isPassword: true,
+                  ),
+                ],
               ),
-              SmartTextButton(
-                text: 'Log in',
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
+              Column(
+                children: [
+                  SmartButton(
+                    icon: Icons.login,
+                    text: 'Register',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/');
+                    },
+                  ),
+                  SmartTextButton(
+                    text: 'Log in',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
+                  ),
+                ],
               )
             ],
           ),
