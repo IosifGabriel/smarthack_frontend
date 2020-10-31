@@ -43,15 +43,6 @@ class _DocumentTabState extends State<DocumentTab> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SmartHeadline('My documents'),
-              SmartButton(
-                icon: Icons.add,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DocumentCreate()),
-                  );
-                },
-              ),
             ],
           ),
           Expanded(
@@ -78,9 +69,38 @@ class _DocumentTabState extends State<DocumentTab> {
                     id: '3',
                     name: 'Viza flotant',
                     description: "Viza dumneavoastra de flotant"),
+                Document(
+                    id: '4',
+                    name: 'Viza flotant',
+                    description: "Viza dumneavoastra de flotant"),
+                Document(
+                    id: '5',
+                    name: 'Viza flotant',
+                    description: "Viza dumneavoastra de flotant"),
               ]);
             }),
           ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 360,
+                child: RaisedButton(
+                  color: Color.fromRGBO(255, 109, 64, 0.5),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  padding: EdgeInsets.all(20),
+                  child: Text("Adauga un document nou"),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DocumentCreate()),
+                    );
+                  },
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
