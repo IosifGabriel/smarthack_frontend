@@ -64,9 +64,20 @@ class _DocumentTabState extends State<DocumentTab> {
               //   );
               // return DocumentsList(_apiResponse.data);
               return DocumentsList([
-                Document(id: '1', name: 'test 1', description: "desc"),
-                Document(id: '2', name: 'test 2', description: "desc"),
-                Document(id: '3', name: 'test 3', description: "desc"),
+                Document(
+                    id: '1',
+                    name: 'Carte de identitate',
+                    description: "Cartea dumneavoastra de identitate",
+                    data:
+                        "https://filebin.net/qmvmxbgn6pzgkbzb/sample.base64?t=7g5s9rwr"),
+                Document(
+                    id: '2',
+                    name: 'Permis conducere',
+                    description: "Permisul dumneavoastra de conducere"),
+                Document(
+                    id: '3',
+                    name: 'Viza flotant',
+                    description: "Viza dumneavoastra de flotant"),
               ]);
             }),
           ),

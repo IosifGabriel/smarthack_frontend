@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 class Document {
   String id;
   String name;
   String description;
-  Base64Codec data;
+  String data;
 
   Document({this.id, this.name, this.description, this.data});
 

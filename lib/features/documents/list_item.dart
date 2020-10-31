@@ -41,8 +41,12 @@ class DocumentListItem extends StatelessWidget {
               subtitle: Row(
                 children: <Widget>[
                   Icon(Icons.linear_scale, color: Colors.yellowAccent),
-                  Text(document.description,
-                      style: TextStyle(color: Colors.white))
+                  Flexible(
+                      child: Text(
+                    document.description,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ))
                 ],
               ),
               trailing: Icon(Icons.keyboard_arrow_right,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarthack_frontend/features/documents/pdfBase64Viewer.dart';
 import 'documents.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
@@ -47,12 +48,7 @@ class _DocumentDetailsState extends State<DocumentDetails> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SmartHeadline(widget.document.name),
-            ],
-          ),
+          child: PdfBase64Viewer("zcz"),
         ),
       ),
     );
