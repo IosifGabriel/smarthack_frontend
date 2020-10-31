@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import '../components/components.dart';
 import '../models/models.dart';
@@ -40,11 +41,16 @@ class _DocumentTabState extends State<DocumentTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SmartHeadline('My documents'),
+              SmartButton(
+                icon: FontAwesomeIcons.user,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/account');
+                },
+              ),
             ],
           ),
+          SmartHeadline('My documents'),
           Expanded(
             child: Builder(builder: (_) {
               // if (_isLoading) return SmartLoader();
