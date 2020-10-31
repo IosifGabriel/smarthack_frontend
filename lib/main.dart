@@ -4,7 +4,7 @@ import './services/services.dart';
 import './screens/screens.dart';
 
 void setupLocator() {
-  GetIt.I.registerSingleton<TodoService>(TodoService());
+  GetIt.I.registerSingleton<DocumentService>(DocumentService());
 }
 
 void main() {
@@ -19,10 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Smarthack',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Montserrat',
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.deepPurple,
-      ),
+          fontFamily: 'Montserrat',
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),

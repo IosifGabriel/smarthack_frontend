@@ -12,34 +12,28 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
   List<Widget> _children = <Widget>[
     HomeTab(),
-    BlankTab(),
-    TodoTab(),
-    AccountTab(),
+    DocumentTab(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       body: SafeArea(
         child: _children.elementAt(_currentTab),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.crop_square),
-            label: 'Blank',
-          ),
-          BottomNavigationBarItem(
+            backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
             icon: Icon(Icons.list),
-            label: 'Todo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
+            label: 'My document',
           ),
         ],
         currentIndex: _currentTab,
@@ -48,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _currentTab = index;
           });
         },
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Colors.deepOrangeAccent,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
       ),

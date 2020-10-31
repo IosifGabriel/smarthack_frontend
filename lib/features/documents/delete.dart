@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'todos.dart';
+import 'documents.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
 
-class TodoDelete extends StatefulWidget {
-  TodoDelete(
-    this.todo, {
+class DocumentDelete extends StatefulWidget {
+  DocumentDelete(
+    this.document, {
     Key key,
   }) : super(key: key);
 
-  final Todo todo;
+  final Document document;
 
   @override
-  _TodoDeleteState createState() => _TodoDeleteState();
+  _DocumentDeleteState createState() => _DocumentDeleteState();
 }
 
-class _TodoDeleteState extends State<TodoDelete> {
+class _DocumentDeleteState extends State<DocumentDelete> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -28,7 +28,7 @@ class _TodoDeleteState extends State<TodoDelete> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SmartText(
-                'Are you sure you want to delete "${widget.todo.text}"?',
+                'Are you sure you want to delete "${widget.document.name}"?',
               ),
               SmartButton(
                 icon: Icons.delete,

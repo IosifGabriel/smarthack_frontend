@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import './todos.dart';
+import 'documents.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
 
-class TodoDetails extends StatefulWidget {
-  TodoDetails(
-    this.todo, {
+class DocumentDetails extends StatefulWidget {
+  DocumentDetails(
+    this.document, {
     Key key,
   }) : super(key: key);
 
-  final Todo todo;
+  final Document document;
 
   @override
-  _TodoDetailsState createState() => _TodoDetailsState();
+  _DocumentDetailsState createState() => _DocumentDetailsState();
 }
 
-class _TodoDetailsState extends State<TodoDetails> {
+class _DocumentDetailsState extends State<DocumentDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,8 @@ class _TodoDetailsState extends State<TodoDetails> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TodoEdit(widget.todo)),
+                MaterialPageRoute(
+                    builder: (context) => DocumentEdit(widget.document)),
               );
             },
           ),
@@ -36,7 +37,7 @@ class _TodoDetailsState extends State<TodoDetails> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return TodoDelete(widget.todo);
+                  return DocumentDelete(widget.document);
                 },
               );
             },
@@ -49,7 +50,7 @@ class _TodoDetailsState extends State<TodoDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SmartHeadline(widget.todo.text),
+              SmartHeadline(widget.document.name),
             ],
           ),
         ),

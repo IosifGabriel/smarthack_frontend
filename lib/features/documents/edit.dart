@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'todos.dart';
+import 'documents.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
 
-class TodoCreate extends StatefulWidget {
-  TodoCreate({
+class DocumentEdit extends StatefulWidget {
+  DocumentEdit(
+    this.document, {
     Key key,
   }) : super(key: key);
 
+  final Document document;
+
   @override
-  _TodoCreateState createState() => _TodoCreateState();
+  _DocumentEditState createState() => _DocumentEditState();
 }
 
-class _TodoCreateState extends State<TodoCreate> {
+class _DocumentEditState extends State<DocumentEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,17 +29,18 @@ class _TodoCreateState extends State<TodoCreate> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SmartHeadline('Add Todo'),
+                  SmartHeadline('Edit Document'),
                   SizedBox(height: 20),
                   SmartTextField(
                     label: 'text',
+                    initialValue: widget.document.name,
                     keyboardType: TextInputType.text,
                   ),
                 ],
               ),
               SmartButton(
-                icon: Icons.add,
-                text: 'Create Todo',
+                icon: Icons.save_outlined,
+                text: 'Save Document',
                 onPressed: () {
                   Navigator.pop(context);
                 },

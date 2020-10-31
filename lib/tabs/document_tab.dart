@@ -3,31 +3,31 @@ import 'package:get_it/get_it.dart';
 import '../components/components.dart';
 import '../models/models.dart';
 import '../services/services.dart';
-import '../features/todos/todos.dart';
+import '../features/documents/documents.dart';
 
-class TodoTab extends StatefulWidget {
-  TodoTab({Key key}) : super(key: key);
+class DocumentTab extends StatefulWidget {
+  DocumentTab({Key key}) : super(key: key);
 
   @override
-  _TodoTabState createState() => _TodoTabState();
+  _DocumentTabState createState() => _DocumentTabState();
 }
 
-class _TodoTabState extends State<TodoTab> {
-  TodoService get todoService => GetIt.I.get<TodoService>();
+class _DocumentTabState extends State<DocumentTab> {
+  DocumentService get documentService => GetIt.I.get<DocumentService>();
 
   bool _isLoading = true;
-  ApiResponse<List<Todo>> _apiResponse;
+  ApiResponse<List<Document>> _apiResponse;
 
   @override
   void initState() {
-    _fetchTodos();
+    _fetchDocuments();
     super.initState();
   }
 
-  void _fetchTodos() async {
+  void _fetchDocuments() async {
     setState(() => _isLoading = true);
 
-    _apiResponse = await todoService.getTodos();
+    _apiResponse = await documentService.getDocuments();
 
     setState(() => _isLoading = false);
   }
@@ -42,13 +42,13 @@ class _TodoTabState extends State<TodoTab> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SmartHeadline('Todos'),
+              SmartHeadline('My documents'),
               SmartButton(
                 icon: Icons.add,
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TodoCreate()),
+                    MaterialPageRoute(builder: (context) => DocumentCreate()),
                   );
                 },
               ),
@@ -62,11 +62,11 @@ class _TodoTabState extends State<TodoTab> {
               //     message: _apiResponse.errorMessage,
               //     errorCode: _apiResponse.errorCode,
               //   );
-              // return TodosList(_apiResponse.data);
-              return TodosList([
-                Todo(id: '1', text: 'test 1'),
-                Todo(id: '2', text: 'test 2'),
-                Todo(id: '3', text: 'test 3'),
+              // return DocumentsList(_apiResponse.data);
+              return DocumentsList([
+                Document(id: '1', name: 'test 1', description: "desc"),
+                Document(id: '2', name: 'test 2', description: "desc"),
+                Document(id: '3', name: 'test 3', description: "desc"),
               ]);
             }),
           ),
