@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/models.dart';
 
-class DocumentService {
+class InstitutiiService {
   static const api = 'https://smarthack-backend.herokuapp.com';
   static const headers = {
     'Authorization':
@@ -29,26 +29,6 @@ class DocumentService {
       );
     }).catchError((error) {
       return ApiResponse<List<Document>>(
-        error: true,
-        errorMessage: 'An error occured',
-      );
-    });
-  }
-
-  Future<ApiResponse<String>> getPDF() async {
-    return http.get('$api/getB64String', headers: headers).then((data) {
-      if (data.statusCode == 200) {
-        return ApiResponse<String>(
-          data: data.body,
-        );
-      }
-      return ApiResponse<String>(
-        error: true,
-        errorCode: data.statusCode,
-        errorMessage: 'An error occured',
-      );
-    }).catchError((error) {
-      return ApiResponse<String>(
         error: true,
         errorMessage: 'An error occured',
       );

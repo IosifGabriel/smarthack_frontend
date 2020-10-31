@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import './documents.dart';
+import 'package:smarthack_frontend/models/institutii.dart';
+import './institutii.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
 
-class DocumentListItem extends StatelessWidget {
-  const DocumentListItem(
+class InstitutiiListItem extends StatelessWidget {
+  const InstitutiiListItem(
     this.document, {
     this.onTap,
     Key key,
   }) : super(key: key);
 
-  final Document document;
+  final Institutii document;
   final Function onTap;
 
   @override

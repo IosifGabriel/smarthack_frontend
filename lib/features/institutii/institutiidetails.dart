@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smarthack_frontend/features/documents/pdfBase64Viewer.dart';
+import 'package:smarthack_frontend/models/institutii.dart';
 import 'package:smarthack_frontend/services/services.dart';
-import 'documents.dart';
+import 'institutii.dart';
 import '../../models/models.dart';
 import '../../components/components.dart';
 
-class DocumentDetails extends StatefulWidget {
-  DocumentDetails(
+class InstitutiiDetails extends StatefulWidget {
+  InstitutiiDetails(
     this.document, {
     Key key,
   }) : super(key: key);
 
-  final Document document;
+  final Institutii document;
 
   @override
-  _DocumentDetailsState createState() => _DocumentDetailsState();
+  _InstitutiiDetailsState createState() => _InstitutiiDetailsState();
 }
 
-class _DocumentDetailsState extends State<DocumentDetails> {
-  DocumentService get documentService => GetIt.I.get<DocumentService>();
+class _InstitutiiDetailsState extends State<InstitutiiDetails> {
+  InstitutiiService get documentService => GetIt.I.get<InstitutiiService>();
 
   bool _isLoading = true;
   ApiResponse<String> _apiResponse;
 
   @override
   void initState() {
-    _fetchDocuments();
+    _fetchInstitutiis();
     super.initState();
   }
 
-  void _fetchDocuments() async {
+  void _fetchInstitutiis() async {
     setState(() => _isLoading = true);
 
-    _apiResponse = await documentService.getPDF();
+    // _apiResponse = await documentService.getPDF();
 
     setState(() => _isLoading = false);
   }
@@ -46,22 +47,22 @@ class _DocumentDetailsState extends State<DocumentDetails> {
             IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DocumentEdit(widget.document)),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => InstitutiiEdit(widget.document)),
+                // );
               },
             ),
             IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return DocumentDelete(widget.document);
-                  },
-                );
+                // showDialog(
+                //   context: context,
+                //   builder: (BuildContext context) {
+                //     return InstitutiiDelete(widget.document);
+                //   },
+                // );
               },
             ),
           ],
