@@ -5,6 +5,7 @@ import './screens/screens.dart';
 
 void setupLocator() {
   GetIt.I.registerSingleton<DocumentService>(DocumentService());
+  GetIt.I.registerSingleton<InstitutiiService>(InstitutiiService());
 }
 
 void main() {

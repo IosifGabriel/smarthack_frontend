@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarthack_frontend/models/institutii.dart';
 import './institutii.dart';
 import '../../models/models.dart';
@@ -6,12 +7,12 @@ import '../../components/components.dart';
 
 class InstitutiiListItem extends StatelessWidget {
   const InstitutiiListItem(
-    this.document, {
+    this.institutie, {
     this.onTap,
     Key key,
   }) : super(key: key);
 
-  final Institutii document;
+  final Institutii institutie;
   final Function onTap;
 
   @override
@@ -35,16 +36,16 @@ class InstitutiiListItem extends StatelessWidget {
                 child: Icon(Icons.autorenew, color: Colors.white),
               ),
               title: Text(
-                document.name,
+                institutie.abreviation,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
               subtitle: Row(
                 children: <Widget>[
-                  Icon(Icons.linear_scale, color: Colors.yellowAccent),
+                  Icon(FontAwesomeIcons.building, color: Colors.yellowAccent),
                   Flexible(
                       child: Text(
-                    document.description,
+                    institutie.name,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ))

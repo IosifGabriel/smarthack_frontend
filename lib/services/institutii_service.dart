@@ -6,23 +6,23 @@ class InstitutiiService {
   static const api = 'https://smarthack-backend.herokuapp.com';
   static const headers = {
     'Authorization':
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMDQ1NTUsImlhdCI6MTYwNDE2ODU1NX0.UXUjHrxjKgZnB0w5YiDE8f19LvuyeuEyX2mgMENduAQ',
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMTk0ODksImlhdCI6MTYwNDE4MzQ4OX0.HU-33F6tO9VhLrt8F6nJWk91ZO_WGpOuTUZ6GipTIKk',
   };
 
-  Future<ApiResponse<List<Document>>> getDocuments() async {
-    return http.get('$api/documents').then((data) {
+  Future<ApiResponse<List<Institutii>>> getInstitutii() async {
+    return http.get('$api/institutions', headers: headers).then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
         print(jsonData);
-        final documents = <Document>[];
+        final listainstitutii = <Institutii>[];
         for (var item in jsonData) {
-          documents.add(Document.fromJson(item));
+          listainstitutii.add(Institutii.fromJson(item));
         }
-        return ApiResponse<List<Document>>(
-          data: documents,
+        return ApiResponse<List<Institutii>>(
+          data: listainstitutii,
         );
       }
-      return ApiResponse<List<Document>>(
+      return ApiResponse<List<Institutii>>(
         error: true,
         errorCode: data.statusCode,
         errorMessage: 'An error occured',
