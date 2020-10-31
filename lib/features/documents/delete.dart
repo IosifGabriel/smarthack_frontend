@@ -28,7 +28,7 @@ class _DocumentDeleteState extends State<DocumentDelete> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SmartText(
-                'Are you sure you want to delete "${widget.document.name}"?',
+                'Doriti sa stergeti documentul "${widget.document.name}"?',
               ),
               SmartButton(
                 icon: Icons.delete,

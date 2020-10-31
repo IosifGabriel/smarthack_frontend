@@ -23,34 +23,24 @@ class DocumentListItem extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
           child: ListTile(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              leading: Container(
-                padding: EdgeInsets.only(right: 12.0),
-                decoration: new BoxDecoration(
-                    border: new Border(
-                        right:
-                            new BorderSide(width: 1.0, color: Colors.white24))),
-                child: Icon(Icons.autorenew, color: Colors.white),
-              ),
-              title: Text(
-                document.name,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Row(
-                children: <Widget>[
-                  Icon(Icons.linear_scale, color: Colors.yellowAccent),
-                  Flexible(
-                      child: Text(
-                    document.description,
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ))
-                ],
-              ),
-              trailing: Icon(Icons.keyboard_arrow_right,
-                  color: Colors.white, size: 30.0)),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                  border: new Border(
+                      right:
+                          new BorderSide(width: 1.0, color: Colors.white24))),
+              child: Icon(Icons.autorenew, color: Colors.white),
+            ),
+            title: Text(
+              document.name,
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            trailing: Icon(Icons.keyboard_arrow_right,
+                color: Colors.white, size: 30.0),
+          ),
         ),
       ),
     );

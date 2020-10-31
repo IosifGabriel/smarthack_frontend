@@ -52,39 +52,39 @@ class _DocumentTabState extends State<DocumentTab> {
           ),
           SmartHeadline('My documents'),
           Expanded(
-            child: Builder(builder: (_) {
-              // if (_isLoading) return SmartLoader();
-              // if (_apiResponse.error)
-              //   return SmartError(
-              //     message: _apiResponse.errorMessage,
-              //     errorCode: _apiResponse.errorCode,
-              //   );
-              // return DocumentsList(_apiResponse.data);
-              return DocumentsList([
-                Document(
+            child: Builder(
+              builder: (_) {
+                // if (_isLoading) return SmartLoader();
+                // if (_apiResponse.error)
+                //   return SmartError(
+                //     message: _apiResponse.errorMessage,
+                //     errorCode: _apiResponse.errorCode,
+                //   );
+                // return DocumentsList(_apiResponse.data);
+                return DocumentsList([
+                  Document(
                     id: '1',
                     name: 'Carte de identitate',
-                    description: "Cartea dumneavoastra de identitate",
-                    data:
-                        "https://filebin.net/qmvmxbgn6pzgkbzb/sample.base64?t=7g5s9rwr"),
-                Document(
+                  ),
+                  Document(
                     id: '2',
                     name: 'Permis conducere',
-                    description: "Permisul dumneavoastra de conducere"),
-                Document(
+                  ),
+                  Document(
                     id: '3',
                     name: 'Viza flotant',
-                    description: "Viza dumneavoastra de flotant"),
-                Document(
+                  ),
+                  Document(
                     id: '4',
                     name: 'Viza flotant',
-                    description: "Viza dumneavoastra de flotant"),
-                Document(
+                  ),
+                  Document(
                     id: '5',
                     name: 'Viza flotant',
-                    description: "Viza dumneavoastra de flotant"),
-              ]);
-            }),
+                  ),
+                ]);
+              },
+            ),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,

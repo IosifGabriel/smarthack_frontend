@@ -6,7 +6,7 @@ class DocumentService {
   static const api = 'https://smarthack-backend.herokuapp.com';
   static const headers = {
     'Authorization':
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMDQ1NTUsImlhdCI6MTYwNDE2ODU1NX0.UXUjHrxjKgZnB0w5YiDE8f19LvuyeuEyX2mgMENduAQ',
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMTkzNjMsImlhdCI6MTYwNDE4MzM2M30.wPyuI80BVlERIWl2mUSROLNIs_Pki7KP7zuD_-fKGnI',
   };
 
   Future<ApiResponse<List<Document>>> getDocuments() async {
@@ -36,7 +36,7 @@ class DocumentService {
   }
 
   Future<ApiResponse<String>> getPDF() async {
-    return http.get('$api/getB64String', headers: headers).then((data) {
+    return http.get('$api/users/getB64String', headers: headers).then((data) {
       if (data.statusCode == 200) {
         return ApiResponse<String>(
           data: data.body,
