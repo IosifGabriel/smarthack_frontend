@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class SmartTextField extends StatefulWidget {
@@ -5,6 +7,7 @@ class SmartTextField extends StatefulWidget {
     this.label,
     this.initialValue,
     this.isPassword = false,
+    this.controller,
     this.keyboardType = TextInputType.text,
     Key key,
   }) : super(key: key);
@@ -12,6 +15,7 @@ class SmartTextField extends StatefulWidget {
   final String label;
   final String initialValue;
   final bool isPassword;
+  final TextEditingController controller;
   final TextInputType keyboardType;
 
   @override
@@ -22,6 +26,7 @@ class _SmartTextFieldState extends State<SmartTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       decoration: InputDecoration(
         labelText: widget.label,
         fillColor: Colors.white,

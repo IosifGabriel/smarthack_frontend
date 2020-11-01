@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:smarthack_frontend/models/auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smarthack_frontend/services/services.dart';
 import '../components/components.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthService get authService => GetIt.I.get<AuthService>();
+
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 children: [
                   SmartTextField(
+                    controller: emailController,
                     label: 'email',
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 20),
                   SmartTextField(
+                    controller: passwordController,
                     label: 'password',
                     isPassword: true,
                   ),
@@ -38,9 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SmartButton(
                     icon: Icons.login,
                     text: 'Log in',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
-                    },
+                    onPressed: () => _auth(context),
                   ),
                   SmartTextButton(
                     text: 'Register',
@@ -55,5 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _auth(context) async {
+    var _apiResponse =
+        await authService.auth(emailController.text, passwordController.text);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (!_apiResponse.error) {
+      prefs.setString('authToken', _apiResponse.data.token);
+      Navigator.pushNamed(context, '/');
+    }
   }
 }

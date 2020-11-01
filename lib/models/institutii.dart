@@ -1,15 +1,15 @@
 class Institutii {
-  String id;
+  String abreviation;
+  String address;
   String name;
-  String description;
 
-  Institutii({this.id, this.name, this.description});
+  Institutii({this.abreviation, this.address, this.name});
 
   factory Institutii.fromJson(Map<String, dynamic> item) {
     return Institutii(
-      id: item['id'],
+      abreviation: item['abreviation'],
+      address: item['address'],
       name: item['name'],
-      description: item['description'],
     );
   }
 }

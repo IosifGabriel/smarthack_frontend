@@ -1,28 +1,34 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/models.dart';
 
 class InstitutiiService {
   static const api = 'https://smarthack-backend.herokuapp.com';
-  static const headers = {
-    'Authorization':
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMDQ1NTUsImlhdCI6MTYwNDE2ODU1NX0.UXUjHrxjKgZnB0w5YiDE8f19LvuyeuEyX2mgMENduAQ',
-  };
+  Map<String, String> headers;
 
-  Future<ApiResponse<List<Document>>> getDocuments() async {
-    return http.get('$api/documents').then((data) {
+  Future<Map<String, String>> _getheader() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return headers = {
+      'Authorization': prefs.getString('authToken'),
+    };
+  }
+
+  Future<ApiResponse<List<Institutii>>> getInstitutii() async {
+    headers = await _getheader();
+    return http.get('$api/institutions', headers: headers).then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
         print(jsonData);
-        final documents = <Document>[];
+        final listainstitutii = <Institutii>[];
         for (var item in jsonData) {
-          documents.add(Document.fromJson(item));
+          listainstitutii.add(Institutii.fromJson(item));
         }
-        return ApiResponse<List<Document>>(
-          data: documents,
+        return ApiResponse<List<Institutii>>(
+          data: listainstitutii,
         );
       }
-      return ApiResponse<List<Document>>(
+      return ApiResponse<List<Institutii>>(
         error: true,
         errorCode: data.statusCode,
         errorMessage: 'An error occured',
