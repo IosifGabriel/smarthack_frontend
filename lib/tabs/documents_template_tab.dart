@@ -37,6 +37,7 @@ class _DocumentTemplateTabState extends State<DocumentTemplateTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
         appBar: AppBar(),
         body: SafeArea(
             child: Padding(
@@ -179,6 +180,7 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
         appBar: AppBar(),
         body: SafeArea(
           child: Padding(

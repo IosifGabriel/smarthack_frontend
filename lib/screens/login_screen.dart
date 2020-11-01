@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -46,20 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  SmartButton(
-                    icon: Icons.login,
-                    text: 'Log in',
-                    onPressed: () => _auth(context),
-                  ),
-                  // SmartTextButton(
-                  //   text: 'Register',
-                  //   onPressed: () {
-                  //     Navigator.pushNamed(context, '/register');
-                  //   },
-                  // )
-                ],
+              SizedBox(
+                width: 360,
+                child: RaisedButton(
+                  color: Color.fromRGBO(255, 109, 64, 0.5),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  padding: EdgeInsets.all(20),
+                  child: Text("Conecteaza-te la portofelul tau electornic"),
+                  onPressed: () => _auth(context),
+                ),
               ),
             ],
           ),
