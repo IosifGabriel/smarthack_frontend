@@ -6,15 +6,16 @@ import '../models/models.dart';
 import '../services/services.dart';
 import '../features/documents/documents.dart';
 
-class DocumentTab extends StatefulWidget {
-  DocumentTab({Key key}) : super(key: key);
+class DocumentTemplateTab extends StatefulWidget {
+  DocumentTemplateTab({Key key}) : super(key: key);
 
   @override
-  _DocumentTabState createState() => _DocumentTabState();
+  _DocumentTemplateTabState createState() => _DocumentTemplateTabState();
 }
 
-class _DocumentTabState extends State<DocumentTab> {
-  DocumentService get documentService => GetIt.I.get<DocumentService>();
+class _DocumentTemplateTabState extends State<DocumentTemplateTab> {
+  DocumentTemplateService get documentTemplateService =>
+      GetIt.I.get<DocumentTemplateService>();
 
   bool _isLoading = true;
   ApiResponse<List<DocumentTemplate>> _apiResponse;
@@ -28,90 +29,95 @@ class _DocumentTabState extends State<DocumentTab> {
   void _fetchDocuments() async {
     setState(() => _isLoading = true);
 
-    _apiResponse = await documentService.getDocumentTemplates();
+    _apiResponse = await documentTemplateService.getDocumentTemplates();
 
     setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+        appBar: AppBar(),
+        body: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SmartHeadline('Documente necesare'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmartHeadline('Documente'),
+                ],
+              ),
+              Expanded(
+                child: Builder(builder: (_) {
+                  if (_isLoading) return SmartLoader();
+                  if (_apiResponse.error)
+                    return SmartError(
+                      message: _apiResponse.errorMessage,
+                      errorCode: _apiResponse.errorCode,
+                    );
+                  return ListView.builder(
+                    itemCount: _apiResponse.data.length,
+                    itemBuilder: (context, index) {
+                      return DocumentTemplateListItem(
+                        _apiResponse.data[index],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DocumentTemplateDetails(
+                                  _apiResponse.data[index]),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                }),
+              ),
             ],
           ),
-          Expanded(
-            child: Builder(builder: (_) {
-              if (_isLoading) return SmartLoader();
-              if (_apiResponse.error)
-                return SmartError(
-                  message: _apiResponse.errorMessage,
-                  errorCode: _apiResponse.errorCode,
-                );
-              return ListView.builder(
-                itemCount: _apiResponse.data.length,
-                itemBuilder: (context, index) {
-                  return DocumentTemplateListItem(
-                    _apiResponse.data[index],
-                    // onTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           DocumentTemplateDetails(_apiResponse.data[index]),
-                    //     ),
-                    //   );
-                    // },
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
-    );
+        )));
   }
 }
 
-class DocumentTemplateList extends StatefulWidget {
-  DocumentTemplateList(
-    this.documents, {
-    Key key,
-  }) : super(key: key);
+// class DocumentTemplateDetails {}
 
-  final List<Document> documents;
+// class DocumentTemplateList extends StatefulWidget {
+//   DocumentTemplateList(
+//     this.documents, {
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  _DocumentTemplateListState createState() => _DocumentTemplateListState();
-}
+//   final List<Document> documents;
 
-class _DocumentTemplateListState extends State<DocumentsList> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.documents.length,
-      itemBuilder: (context, index) {
-        return DocumentListItem(
-          widget.documents[index],
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      DocumentDetails(widget.documents[index])),
-            );
-          },
-        );
-      },
-    );
-  }
-}
+//   @override
+//   _DocumentTemplateListState createState() => _DocumentTemplateListState();
+// }
+
+// class _DocumentTemplateListState extends State<DocumentTemplateList> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(
+//       itemCount: widget.documents.length,
+//       itemBuilder: (context, index) {
+//         return DocumentListItem(
+//           widget.documents[index],
+//           onTap: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                   builder: (context) =>
+//                       DocumentTemplateDetails(widget.documents[index])),
+//             );
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
 
 class DocumentTemplateListItem extends StatelessWidget {
   const DocumentTemplateListItem(
@@ -153,5 +159,39 @@ class DocumentTemplateListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class DocumentTemplateDetails extends StatefulWidget {
+  DocumentTemplateDetails(
+    this.documentTemplate, {
+    Key key,
+  }) : super(key: key);
+
+  final DocumentTemplate documentTemplate;
+
+  @override
+  _DocumentTemplateDetailsState createState() =>
+      _DocumentTemplateDetailsState();
+}
+
+class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: _fields(widget.documentTemplate)),
+        ));
+  }
+
+  Widget _fields(template) {
+    List<Widget> fields = [];
+    for (int i = 1; i <= 4; i++) {
+      fields.add(Text('aaa'));
+    }
+    return Column(children: [...fields]);
   }
 }

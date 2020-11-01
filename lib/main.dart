@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:smarthack_frontend/services/documentTemplate_service.dart';
 import './services/services.dart';
 import './screens/screens.dart';
 
@@ -7,6 +8,8 @@ void setupLocator() {
   GetIt.I.registerSingleton<DocumentService>(DocumentService());
   GetIt.I.registerSingleton<InstitutiiService>(InstitutiiService());
   GetIt.I.registerSingleton<AuthService>(AuthService());
+  GetIt.I.registerSingleton<DocumentTemplateService>(DocumentTemplateService());
+  GetIt.I.registerSingleton<AccountService>(AccountService());
 }
 
 void main() {
