@@ -1,15 +1,21 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/models.dart';
 
 class InstitutiiService {
   static const api = 'https://smarthack-backend.herokuapp.com';
-  static const headers = {
-    'Authorization':
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMTk0ODksImlhdCI6MTYwNDE4MzQ4OX0.HU-33F6tO9VhLrt8F6nJWk91ZO_WGpOuTUZ6GipTIKk',
-  };
+  Map<String, String> headers;
+
+  Future<Map<String, String>> _getheader() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return headers = {
+      'Authorization': prefs.getString('authToken'),
+    };
+  }
 
   Future<ApiResponse<List<Institutii>>> getInstitutii() async {
+    headers = await _getheader();
     return http.get('$api/institutions', headers: headers).then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);

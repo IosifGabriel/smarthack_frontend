@@ -1,19 +1,33 @@
 class User {
-  String name;
-  String adresa;
-  String telefon;
+  int id;
+  String username;
+  String firstName;
+  String lastName;
   String email;
   String cnp;
+  String role;
+  String institution;
 
-  User({this.name, this.adresa, this.telefon, this.email, this.cnp});
+  User(
+      {this.id,
+      this.username,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.cnp,
+      this.role,
+      this.institution});
 
   factory User.fromJson(Map<String, dynamic> item) {
     return User(
-      name: item['name'],
-      adresa: item['adresa'],
-      telefon: item['telefon'],
+      id: item['id'],
+      username: item['username'],
+      firstName: item['firstName'],
+      lastName: item['lastName'],
       email: item['email'],
       cnp: item['cnp'],
+      role: item['role'],
+      institution: item['cninstitutionp'],
     );
   }
 }
