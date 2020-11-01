@@ -34,35 +34,41 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: SafeArea(
-            child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Builder(builder: (_) {
-                  if (_isLoading) return SmartLoader();
-                  if (_apiResponse.error)
-                    return SmartError(
-                      message: _apiResponse.errorMessage,
-                      errorCode: _apiResponse.errorCode,
-                    );
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Column(
-                        children: [
-                          SmartAvatar(
-                              '${_apiResponse.data.firstName[0]}${_apiResponse.data.lastName[0]}'),
-                          SizedBox(height: 20),
-                          SmartHeadline(
-                              '${_apiResponse.data.firstName} ${_apiResponse.data.lastName}'),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      SmartText('email: ' + _apiResponse.data.email),
-                      SizedBox(height: 20),
-                      SmartText('CNP: ' + _apiResponse.data.cnp),
-                    ],
-                  );
-                }))));
+      backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Builder(
+            builder: (_) {
+              if (_isLoading) return SmartLoader();
+              if (_apiResponse.error)
+                return SmartError(
+                  message: _apiResponse.errorMessage,
+                  errorCode: _apiResponse.errorCode,
+                );
+              return Center(
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        SmartAvatar('AS'),
+                        SizedBox(height: 20),
+                        SmartHeadline(
+                            '${_apiResponse.data.firstName} ${_apiResponse.data.lastName}'),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    SmartText('${_apiResponse.data.email}'),
+                    SizedBox(height: 20),
+                    SmartText('CNP:  ${_apiResponse.data.cnp}'),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 }

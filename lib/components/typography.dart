@@ -35,6 +35,7 @@ class SmartText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 16,
+        color: Colors.white,
       ),
     );
   }

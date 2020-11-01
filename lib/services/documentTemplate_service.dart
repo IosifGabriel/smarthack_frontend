@@ -5,17 +5,18 @@ import '../models/models.dart';
 
 class DocumentTemplateService {
   static const api = 'https://smarthack-backend.herokuapp.com';
-  Map<String, String> headers;
+  // Map<String, String> headers;
 
   Future<Map<String, String>> _getheader() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return headers = {
+    return {
+      "Content-Type": "application/json",
       'Authorization': prefs.getString('authToken'),
     };
   }
 
   Future<ApiResponse<List<DocumentTemplate>>> getDocumentTemplates() async {
-    headers = await _getheader();
+    var headers = await _getheader();
     return http.get('$api/documentTemplates', headers: headers).then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
@@ -42,13 +43,14 @@ class DocumentTemplateService {
   }
 
   Future<ApiResponse<String>> createRequest(
-      completedFieldsMap, institutionId, requestedDocumentTemplateId) {
-    var body = jsonEncode(<String, String>{
-      'completedFieldsMap': jsonEncode(completedFieldsMap),
-      'documentIds': '[]',
-      'institutionId': jsonEncode(institutionId),
-      'requestedDocumentTemplateId': jsonEncode(requestedDocumentTemplateId),
+      completedFieldsMap, institutionId, requestedDocumentTemplateId) async {
+    var body = jsonEncode(<String, dynamic>{
+      'completedFieldsMap': completedFieldsMap,
+      'documentIds': [],
+      'institutionId': institutionId,
+      'requestedDocumentTemplateId': requestedDocumentTemplateId,
     });
+    var headers = await _getheader();
     return http
         .post('$api/requests', headers: headers, body: body)
         .then((data) {

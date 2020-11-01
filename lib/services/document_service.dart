@@ -11,6 +11,7 @@ class DocumentService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return headers = {
+      "Content-Type": "application/json",
       'Authorization': prefs.getString('authToken'),
     };
   }

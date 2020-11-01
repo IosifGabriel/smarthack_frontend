@@ -159,8 +159,6 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
   }
 
   Widget _textFields(template) {
-    widget.documentTemplate.fields = ['Nume', 'Prenume', 'Data'];
-
     List<Widget> fields = [];
     _inputs = [];
     for (int i = 0; i < widget.documentTemplate.fields.length; i++) {
@@ -180,11 +178,13 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
   Future<void> _createRequest() async {
     Map<String, String> inputs = Map<String, String>();
     for (int i = 0; i < _inputs.length; i++) {
-      inputs.putIfAbsent(widget.documentTemplate.fields[i], () => _inputs[i].text);
+      inputs.putIfAbsent(
+          widget.documentTemplate.fields[i], () => _inputs[i].text);
     }
 
     int institutionId = 1;
-    var _apiResponse = await documentTemplateService.createRequest(inputs, institutionId, widget.documentTemplate.id);
+    var _apiResponse = await documentTemplateService.createRequest(
+        inputs, institutionId, widget.documentTemplate.id);
     if (!_apiResponse.error) {
       Navigator.pushNamed(context, '/');
     }

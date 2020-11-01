@@ -43,19 +43,19 @@ class _DocumentTabState extends State<DocumentTab> {
         children: [
           Row(
             children: [
-              SmartButton(
-                icon: FontAwesomeIcons.user,
-                onPressed: () {
-                  Navigator.pushNamed(context, '/account');
-                },
-              ),
+              IconButton(
+                color: Colors.transparent,
+                icon: Icon(
+                  FontAwesomeIcons.user,
+                  color: Colors.white,
+                ),
+                onPressed: () => Navigator.pushNamed(context, '/account'),
+              )
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [SizedBox(height: 160), SmartHeadline('My documents')],
-          ),
+          SizedBox(height: 20),
+          SmartHeadline('Documentele mele'),
+          SizedBox(height: 20),
           Expanded(
             child: Builder(
               builder: (_) {

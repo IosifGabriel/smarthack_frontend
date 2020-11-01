@@ -5,18 +5,15 @@ class User {
   String lastName;
   String email;
   String cnp;
-  String role;
-  String institution;
 
-  User(
-      {this.id,
-      this.username,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.cnp,
-      this.role,
-      this.institution});
+  User({
+    this.id,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.cnp,
+  });
 
   factory User.fromJson(Map<String, dynamic> item) {
     return User(
@@ -26,8 +23,6 @@ class User {
       lastName: item['lastName'],
       email: item['email'],
       cnp: item['cnp'],
-      role: item['role'],
-      institution: item['cninstitutionp'],
     );
   }
 }

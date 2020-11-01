@@ -17,8 +17,9 @@ class InstitutiisList extends StatefulWidget {
 class _InstitutiisListState extends State<InstitutiisList> {
   @override
   Widget build(BuildContext context) {
-    return GridView.count(crossAxisCount: 2, children: [
-      ListView.builder(
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: ListView.builder(
         itemCount: widget.institutii.length,
         itemBuilder: (context, index) {
           return InstitutiiListItem(
@@ -33,7 +34,7 @@ class _InstitutiisListState extends State<InstitutiisList> {
             },
           );
         },
-      )
-    ]);
+      ),
+    );
   }
 }

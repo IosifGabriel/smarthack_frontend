@@ -20,19 +20,19 @@ class _DocumentDeleteState extends State<DocumentDelete> {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: 150,
+        height: 200,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SmartText(
+              Text(
                 'Doriti sa stergeti documentul "${widget.document.name}"?',
               ),
               SmartButton(
                 icon: Icons.delete,
-                text: 'Delete',
+                text: 'Sterge',
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
