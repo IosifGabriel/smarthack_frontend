@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:smarthack_frontend/tabs/institutii_tab.dart';
 import '../components/components.dart';
 import '../models/models.dart';
 import '../services/services.dart';
@@ -100,7 +101,7 @@ class _DocumentTabState extends State<DocumentTab> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DocumentCreate()),
+                      MaterialPageRoute(builder: (context) => InstitutiiTab()),
                     );
                   },
                 ),

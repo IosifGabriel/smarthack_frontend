@@ -16,7 +16,7 @@ dependencies:
   font_awesome_flutter: ^8.10.0
   convert: ^2.1.1
   pdf_render: ^0.67.0
-
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:

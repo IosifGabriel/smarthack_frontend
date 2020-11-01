@@ -4,11 +4,11 @@ import '../../models/models.dart';
 
 class InstitutiisList extends StatefulWidget {
   InstitutiisList(
-    this.documents, {
+    this.institutii, {
     Key key,
   }) : super(key: key);
 
-  final List<Institutii> documents;
+  final List<Institutii> institutii;
 
   @override
   _InstitutiisListState createState() => _InstitutiisListState();
@@ -17,21 +17,23 @@ class InstitutiisList extends StatefulWidget {
 class _InstitutiisListState extends State<InstitutiisList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.documents.length,
-      itemBuilder: (context, index) {
-        return InstitutiiListItem(
-          widget.documents[index],
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      InstitutiiDetails(widget.documents[index])),
-            );
-          },
-        );
-      },
-    );
+    return GridView.count(crossAxisCount: 2, children: [
+      ListView.builder(
+        itemCount: widget.institutii.length,
+        itemBuilder: (context, index) {
+          return InstitutiiListItem(
+            widget.institutii[index],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        InstitutiiDetails(widget.institutii[index])),
+              );
+            },
+          );
+        },
+      )
+    ]);
   }
 }
