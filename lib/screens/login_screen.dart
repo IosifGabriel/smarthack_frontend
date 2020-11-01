@@ -28,15 +28,17 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SmartHeadline('Log in'),
               Column(
                 children: [
+                  SizedBox(height: 150),
+                  SmartHeadline('Log in'),
+                  SizedBox(height: 50),
                   SmartTextField(
                     controller: emailController,
                     label: 'email',
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 50),
                   SmartTextField(
                     controller: passwordController,
                     label: 'password',
@@ -51,12 +53,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'Log in',
                     onPressed: () => _auth(context),
                   ),
-                  SmartTextButton(
-                    text: 'Register',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                  )
+                  // SmartTextButton(
+                  //   text: 'Register',
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(context, '/register');
+                  //   },
+                  // )
                 ],
               ),
             ],
