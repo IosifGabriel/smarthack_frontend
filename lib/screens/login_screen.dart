@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       body: SafeArea(
         child: Padding(
@@ -33,13 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   SizedBox(height: 150),
                   SmartHeadline('Log in'),
-                  SizedBox(height: 50),
+                  SizedBox(height: 80),
                   SmartTextField(
                     controller: emailController,
                     label: 'email',
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 20),
                   SmartTextField(
                     controller: passwordController,
                     label: 'password',

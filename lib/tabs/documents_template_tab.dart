@@ -142,25 +142,25 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
         appBar: AppBar(title: Text(widget.documentTemplate.name)),
         backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
         body: SafeArea(
-          child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _textFields(widget.documentTemplate),
-                  SmartButton(
-                    icon: Icons.add,
-                    text: 'Creeaza cerere document',
-                    onPressed: () => _createRequest(),
-                  ),
-                ],
-              )),
+          child: SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _textFields(widget.documentTemplate),
+                    SmartButton(
+                      icon: Icons.add,
+                      text: 'Creeaza cerere document',
+                      onPressed: () => _createRequest(),
+                    ),
+                  ],
+                )),
+          ),
         ));
   }
 
   Widget _textFields(template) {
-    widget.documentTemplate.fields = ['Nume', 'Prenume', 'Data'];
-
     List<Widget> fields = [];
     _inputs = [];
     for (int i = 0; i < widget.documentTemplate.fields.length; i++) {
@@ -180,11 +180,12 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
   Future<void> _createRequest() async {
     Map<String, String> inputs = Map<String, String>();
     for (int i = 0; i < _inputs.length; i++) {
-      inputs.putIfAbsent(widget.documentTemplate.fields[i], () => _inputs[i].text);
+      inputs.putIfAbsent(
+          widget.documentTemplate.fields[i], () => _inputs[i].text);
     }
 
-    int institutionId = 1;
-    var _apiResponse = await documentTemplateService.createRequest(inputs, institutionId, widget.documentTemplate.id);
+    var _apiResponse = await documentTemplateService.createRequest(inputs,
+        widget.documentTemplate.institutionId, widget.documentTemplate.id);
     if (!_apiResponse.error) {
       Navigator.pushNamed(context, '/');
     }

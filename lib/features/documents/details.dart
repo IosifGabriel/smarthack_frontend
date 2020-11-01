@@ -20,10 +20,7 @@ class DocumentDetails extends StatefulWidget {
 }
 
 class _DocumentDetailsState extends State<DocumentDetails> {
-  DocumentService get documentService => GetIt.I.get<DocumentService>();
-
   bool _isLoading = true;
-  ApiResponse<String> _apiResponse;
   List<Widget> _pdfPages;
 
   @override
@@ -35,8 +32,7 @@ class _DocumentDetailsState extends State<DocumentDetails> {
   void _loadDocument() async {
     setState(() => _isLoading = true);
 
-    _apiResponse = await documentService.getPDF();
-    if (!_apiResponse.error) await _getPdf(_apiResponse.data);
+    await _getPdf(widget.document.documentBlob);
 
     setState(() => _isLoading = false);
   }
@@ -61,6 +57,8 @@ class _DocumentDetailsState extends State<DocumentDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: AppBar(
         actions: [
           IconButton(
@@ -82,19 +80,27 @@ class _DocumentDetailsState extends State<DocumentDetails> {
           child: Builder(
             builder: (_) {
               if (_isLoading) return SmartLoader();
-              if (_apiResponse.error)
-                return SmartError(
-                  message: _apiResponse.errorMessage,
-                  errorCode: _apiResponse.errorCode,
-                );
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SmartHeadline(widget.document.name),
+                    Text(
+                      widget.document.name,
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     SizedBox(height: 20),
-                    Text("Data eliberarii: 11.12.2014"),
-                    Text("Data expirarii: 5.5.2023"),
+                    Text(
+                      "Data eliberarii: ${widget.document.releaseDate}",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "Data expirarii: ${widget.document.expirationDate}",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     SizedBox(height: 20),
                     Column(children: [..._pdfPages]),
                   ],

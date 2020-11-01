@@ -3,3 +3,4 @@ export 'institutii_service.dart';
 export 'auth_service.dart';
 export 'account_service.dart';
 export 'documentTemplate_service.dart';
+export 'seed.dart';

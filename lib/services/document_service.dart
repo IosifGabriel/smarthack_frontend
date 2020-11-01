@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smarthack_frontend/services/services.dart';
 import '../models/models.dart';
 
 class DocumentService {
@@ -11,6 +12,7 @@ class DocumentService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return headers = {
+      "Content-Type": "application/json",
       'Authorization': prefs.getString('authToken'),
     };
   }
@@ -21,7 +23,7 @@ class DocumentService {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
         print(jsonData);
-        final documents = <Document>[];
+        final documents = <Document>[initialDocument];
         for (var item in jsonData) {
           documents.add(Document.fromJson(item));
         }
