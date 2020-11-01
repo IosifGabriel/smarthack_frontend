@@ -50,19 +50,17 @@ class _AccountScreenState extends State<AccountScreen> {
                     children: [
                       Column(
                         children: [
-                          SmartAvatar(_apiResponse.data.firstName +
-                              _apiResponse.data.lastName),
+                          SmartAvatar(
+                              '${_apiResponse.data.firstName[0]}${_apiResponse.data.lastName[0]}'),
                           SizedBox(height: 20),
-                          SmartHeadline(_apiResponse.data.firstName +
-                              _apiResponse.data.lastName),
+                          SmartHeadline(
+                              '${_apiResponse.data.firstName} ${_apiResponse.data.lastName}'),
                         ],
                       ),
                       SizedBox(height: 20),
-                      SizedBox(height: 20),
                       SmartText('email: ' + _apiResponse.data.email),
                       SizedBox(height: 20),
-                      SizedBox(height: 20),
-                      SmartText('CNP' + _apiResponse.data.cnp),
+                      SmartText('CNP: ' + _apiResponse.data.cnp),
                     ],
                   );
                 }))));
