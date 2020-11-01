@@ -37,88 +37,43 @@ class _DocumentTemplateTabState extends State<DocumentTemplateTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
-        appBar: AppBar(),
-        body: SafeArea(
-            child: Padding(
+      backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
+      appBar: AppBar(title: Text('Documente')),
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SmartHeadline('Documente'),
-                ],
-              ),
-              Expanded(
-                child: Builder(builder: (_) {
-                  if (_isLoading) return SmartLoader();
-                  if (_apiResponse.error)
-                    return SmartError(
-                      message: _apiResponse.errorMessage,
-                      errorCode: _apiResponse.errorCode,
-                    );
-                  return ListView.builder(
-                    itemCount: _apiResponse.data.length,
-                    itemBuilder: (context, index) {
-                      return DocumentTemplateListItem(
-                        _apiResponse.data[index],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DocumentTemplateDetails(
-                                  _apiResponse.data[index]),
-                            ),
-                          );
-                        },
+          child: Builder(
+            builder: (_) {
+              if (_isLoading) return SmartLoader();
+              if (_apiResponse.error)
+                return SmartError(
+                  message: _apiResponse.errorMessage,
+                  errorCode: _apiResponse.errorCode,
+                );
+              return ListView.builder(
+                itemCount: _apiResponse.data.length,
+                itemBuilder: (context, index) {
+                  return DocumentTemplateListItem(
+                    _apiResponse.data[index],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DocumentTemplateDetails(_apiResponse.data[index]),
+                        ),
                       );
                     },
                   );
-                }),
-              ),
-            ],
+                },
+              );
+            },
           ),
-        )));
+        ),
+      ),
+    );
   }
 }
-
-// class DocumentTemplateDetails {}
-
-// class DocumentTemplateList extends StatefulWidget {
-//   DocumentTemplateList(
-//     this.documents, {
-//     Key key,
-//   }) : super(key: key);
-
-//   final List<Document> documents;
-
-//   @override
-//   _DocumentTemplateListState createState() => _DocumentTemplateListState();
-// }
-
-// class _DocumentTemplateListState extends State<DocumentTemplateList> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: widget.documents.length,
-//       itemBuilder: (context, index) {
-//         return DocumentListItem(
-//           widget.documents[index],
-//           onTap: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                   builder: (context) =>
-//                       DocumentTemplateDetails(widget.documents[index])),
-//             );
-//           },
-//         );
-//       },
-//     );
-//   }
-// }
 
 class DocumentTemplateListItem extends StatelessWidget {
   const DocumentTemplateListItem(
@@ -136,12 +91,10 @@ class DocumentTemplateListItem extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: 8.0,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
         child: Container(
           decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
           child: ListTile(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              contentPadding: EdgeInsets.all(20),
               leading: Container(
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: new BoxDecoration(
@@ -177,23 +130,63 @@ class DocumentTemplateDetails extends StatefulWidget {
 }
 
 class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
+  DocumentTemplateService get documentTemplateService =>
+      GetIt.I.get<DocumentTemplateService>();
+
+  List<TextEditingController> _inputs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(title: Text(widget.documentTemplate.name)),
         backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
-        appBar: AppBar(),
         body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(20),
-              child: _fields(widget.documentTemplate)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _textFields(widget.documentTemplate),
+                  SmartButton(
+                    icon: Icons.add,
+                    text: 'Creeaza cerere document',
+                    onPressed: () => _createRequest(),
+                  ),
+                ],
+              )),
         ));
   }
 
-  Widget _fields(template) {
+  Widget _textFields(template) {
+    widget.documentTemplate.fields = ['Nume', 'Prenume', 'Data'];
+
     List<Widget> fields = [];
-    for (int i = 1; i <= 4; i++) {
-      fields.add(Text('aaa'));
+    _inputs = [];
+    for (int i = 0; i < widget.documentTemplate.fields.length; i++) {
+      final controller = new TextEditingController();
+      _inputs.add(controller);
+      fields.add(
+        SmartTextField(
+          label: widget.documentTemplate.fields[i],
+          controller: controller,
+        ),
+      );
+      fields.add(SizedBox(height: 10));
     }
     return Column(children: [...fields]);
+  }
+
+  Future<void> _createRequest() async {
+    Map<String, String> inputs = Map<String, String>();
+    for (int i = 0; i < _inputs.length; i++) {
+      inputs.putIfAbsent(widget.documentTemplate.fields[i], () => _inputs[i].text);
+    }
+
+    int institutionId = 1;
+    var _apiResponse = await documentTemplateService.createRequest(inputs, institutionId, widget.documentTemplate.id);
+    if (!_apiResponse.error) {
+      Navigator.pushNamed(context, '/');
+    }
   }
 }

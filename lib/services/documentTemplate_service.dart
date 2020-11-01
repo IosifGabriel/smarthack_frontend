@@ -9,7 +9,6 @@ class DocumentTemplateService {
 
   Future<Map<String, String>> _getheader() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     return headers = {
       'Authorization': prefs.getString('authToken'),
     };
@@ -36,6 +35,35 @@ class DocumentTemplateService {
       );
     }).catchError((error) {
       return ApiResponse<List<DocumentTemplate>>(
+        error: true,
+        errorMessage: 'An error occured',
+      );
+    });
+  }
+
+  Future<ApiResponse<String>> createRequest(
+      completedFieldsMap, institutionId, requestedDocumentTemplateId) {
+    var body = jsonEncode(<String, String>{
+      'completedFieldsMap': jsonEncode(completedFieldsMap),
+      'documentIds': '[]',
+      'institutionId': jsonEncode(institutionId),
+      'requestedDocumentTemplateId': jsonEncode(requestedDocumentTemplateId),
+    });
+    return http
+        .post('$api/requests', headers: headers, body: body)
+        .then((data) {
+      if (data.statusCode == 200) {
+        return ApiResponse<String>(
+          data: 'success',
+        );
+      }
+      return ApiResponse<String>(
+        error: true,
+        errorCode: data.statusCode,
+        errorMessage: 'An error occured',
+      );
+    }).catchError((error) {
+      return ApiResponse<String>(
         error: true,
         errorMessage: 'An error occured',
       );
