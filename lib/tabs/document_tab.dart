@@ -42,6 +42,7 @@ class _DocumentTabState extends State<DocumentTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 color: Colors.transparent,
@@ -50,6 +51,14 @@ class _DocumentTabState extends State<DocumentTab> {
                   color: Colors.white,
                 ),
                 onPressed: () => Navigator.pushNamed(context, '/account'),
+              ),
+              IconButton(
+                color: Colors.transparent,
+                icon: Icon(
+                  FontAwesomeIcons.recycle,
+                  color: Colors.white,
+                ),
+                onPressed: () => _fetchDocuments(),
               )
             ],
           ),
