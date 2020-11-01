@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:smarthack_frontend/models/models.dart';
+import 'package:smarthack_frontend/services/services.dart';
 import '../components/components.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -9,30 +12,59 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  AccountService get accountService => GetIt.I.get<AccountService>();
+
+  bool _isLoading = true;
+  ApiResponse<User> _apiResponse;
+
+  @override
+  void initState() {
+    _fetchDocuments();
+    super.initState();
+  }
+
+  void _fetchDocuments() async {
+    setState(() => _isLoading = true);
+
+    _apiResponse = await accountService.getUser();
+
+    setState(() => _isLoading = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Column(
-                children: [
-                  SmartAvatar('PI'),
-                  SizedBox(height: 20),
-                  SmartHeadline('Popescu Ion'),
-                ],
-              ),
-              SizedBox(height: 20),
-              SmartText('email'),
-              SmartText('CNP'),
-            ],
-          ),
-        ),
-      ),
-    );
+        appBar: AppBar(),
+        body: SafeArea(
+            child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Builder(builder: (_) {
+                  if (_isLoading) return SmartLoader();
+                  if (_apiResponse.error)
+                    return SmartError(
+                      message: _apiResponse.errorMessage,
+                      errorCode: _apiResponse.errorCode,
+                    );
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        children: [
+                          SmartAvatar(_apiResponse.data.firstName +
+                              _apiResponse.data.lastName),
+                          SizedBox(height: 20),
+                          SmartHeadline(_apiResponse.data.firstName +
+                              _apiResponse.data.lastName),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(height: 20),
+                      SmartText('email: ' + _apiResponse.data.email),
+                      SizedBox(height: 20),
+                      SizedBox(height: 20),
+                      SmartText('CNP' + _apiResponse.data.cnp),
+                    ],
+                  );
+                }))));
   }
 }

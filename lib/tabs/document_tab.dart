@@ -55,35 +55,13 @@ class _DocumentTabState extends State<DocumentTab> {
           Expanded(
             child: Builder(
               builder: (_) {
-                // if (_isLoading) return SmartLoader();
-                // if (_apiResponse.error)
-                //   return SmartError(
-                //     message: _apiResponse.errorMessage,
-                //     errorCode: _apiResponse.errorCode,
-                //   );
-                // return DocumentsList(_apiResponse.data);
-                return DocumentsList([
-                  Document(
-                    id: '1',
-                    name: 'Carte de identitate',
-                  ),
-                  Document(
-                    id: '2',
-                    name: 'Permis conducere',
-                  ),
-                  Document(
-                    id: '3',
-                    name: 'Viza flotant',
-                  ),
-                  Document(
-                    id: '4',
-                    name: 'Viza flotant',
-                  ),
-                  Document(
-                    id: '5',
-                    name: 'Viza flotant',
-                  ),
-                ]);
+                if (_isLoading) return SmartLoader();
+                if (_apiResponse.error)
+                  return SmartError(
+                    message: _apiResponse.errorMessage,
+                    errorCode: _apiResponse.errorCode,
+                  );
+                return DocumentsList(_apiResponse.data);
               },
             ),
           ),
