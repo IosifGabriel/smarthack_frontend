@@ -43,7 +43,7 @@ class DocumentService {
   }
 
   Future<ApiResponse<String>> getPDF() async {
-    return http.get('$api/getB64String', headers: headers).then((data) {
+    return http.get('$api/users/getB64String', headers: headers).then((data) {
       if (data.statusCode == 200) {
         return ApiResponse<String>(
           data: data.body,

@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 
 class PdfBase64Viewer extends StatefulWidget {
   final String data;
@@ -30,12 +30,13 @@ class _PdfBase64ViewerState extends State<PdfBase64Viewer> {
   }
 
   Future<String> _createFileFromString(String encodedStr) async {
-    Uint8List bytes = base64.decode(encodedStr);
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    File file = File(
-        "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".pdf");
-    await file.writeAsBytes(bytes);
-    return file.path;
+    // Uint8List bytes = base64.decode(encodedStr);
+    // String dir = (await getApplicationDocumentsDirectory()).path;
+    // File file = File(
+    //     "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".pdf");
+    // await file.writeAsBytes(bytes);
+    // return file.path;
+    return 'aa';
   }
 
   @override

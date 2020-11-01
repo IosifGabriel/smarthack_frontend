@@ -26,8 +26,8 @@ class _DocumentsListState extends State<DocumentsList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      DocumentDetails(widget.documents[index])),
+                builder: (context) => DocumentDetails(widget.documents[index]),
+              ),
             );
           },
         );
