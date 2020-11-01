@@ -40,22 +40,14 @@ class _InstitutiiTabState extends State<InstitutiiTab> {
         appBar: AppBar(
           title: Text("Institutii"),
         ),
-        body: GridView.count(
-          // Create a grid with 2 columns. If you change the scrollDirection to
-          // horizontal, this produces 2 rows.
-          crossAxisCount: 2,
-          // Generate 100 widgets that display their index in the List.
-          children: List.generate(100, (index) {
-            return Card(child: Builder(builder: (_) {
-              if (_isLoading) return SmartLoader();
-              if (_apiResponse.error)
-                return SmartError(
-                  message: _apiResponse.errorMessage,
-                  errorCode: _apiResponse.errorCode,
-                );
-              return InstitutiisList(_apiResponse.data);
-            }));
-          }),
-        ));
+        body: Builder(builder: (_) {
+          if (_isLoading) return SmartLoader();
+          if (_apiResponse.error)
+            return SmartError(
+              message: _apiResponse.errorMessage,
+              errorCode: _apiResponse.errorCode,
+            );
+          return InstitutiisList(_apiResponse.data);
+        }));
   }
 }
