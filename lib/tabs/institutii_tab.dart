@@ -37,6 +37,7 @@ class _InstitutiiTabState extends State<InstitutiiTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
         appBar: AppBar(
           title: Text("Institutii"),
         ),
