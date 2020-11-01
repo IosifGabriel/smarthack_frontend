@@ -29,14 +29,23 @@ class _SmartTextFieldState extends State<SmartTextField> {
       controller: widget.controller,
       decoration: InputDecoration(
         labelText: widget.label,
+        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+        hintStyle: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+        alignLabelWithHint: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 1.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 1),
+        ),
       ),
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       obscureText: widget.isPassword,
       style: TextStyle(
         fontSize: 16,
+        color: Colors.white,
         fontFamily: 'Montserrat',
       ),
     );

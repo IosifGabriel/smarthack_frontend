@@ -15,7 +15,7 @@ class SmartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      color: Colors.deepPurple,
+      color: Color.fromRGBO(255, 109, 64, 0.5),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(

@@ -37,6 +37,7 @@ class _DocumentTemplateTabState extends State<DocumentTemplateTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
       appBar: AppBar(title: Text('Documente')),
       body: SafeArea(
         child: Padding(
@@ -139,6 +140,7 @@ class _DocumentTemplateDetailsState extends State<DocumentTemplateDetails> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(title: Text(widget.documentTemplate.name)),
+        backgroundColor: Color.fromRGBO(53, 66, 86, 1.0),
         body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(20),

@@ -51,7 +51,11 @@ class _DocumentTabState extends State<DocumentTab> {
               ),
             ],
           ),
-          SmartHeadline('My documents'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [SizedBox(height: 160), SmartHeadline('My documents')],
+          ),
           Expanded(
             child: Builder(
               builder: (_) {

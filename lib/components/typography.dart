@@ -14,6 +14,7 @@ class SmartHeadline extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 36,
+        color: Colors.white,
         fontWeight: FontWeight.w600,
       ),
     );
